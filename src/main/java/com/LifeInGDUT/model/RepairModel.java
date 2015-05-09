@@ -1,21 +1,13 @@
 package com.LifeInGDUT.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="repair")
-public class Repair {
-	private int id;
+public class RepairModel {
 	private String type;
 	private String school_area;
 	private String life_area;
 	private String building;
 	private String address;
-	private String description;
+	private String desc;
 	private String eager;
 	private String repair_unit;
 	private String linkman;
@@ -24,14 +16,7 @@ public class Repair {
 	private String time;
 	private String status;
 	
-	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO)
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public String getType() {
 		return type;
 	}
@@ -62,11 +47,11 @@ public class Repair {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getDescription() {
-		return description;
+	public String getDesc() {
+		return desc;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 	public String getEager() {
 		return eager;
@@ -110,6 +95,4 @@ public class Repair {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
 }

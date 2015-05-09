@@ -36,7 +36,7 @@
 
     <!-- 开启controller注解支持 -->
     <!-- use-default-filters="false" 只扫描指定的注解 -->
-    <context:component-scan base-package="com.Hotel.controller" use-default-filters="false">
+    <context:component-scan base-package="com.LifeInGDUT.controller" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
       
