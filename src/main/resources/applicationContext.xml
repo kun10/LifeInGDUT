@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p" xmlns:cache="http://www.springframework.org/schema/cache" xmlns:jaxws="http://cxf.apache.org/jaxws"  
-    xmlns:task="http://www.springframework.org/schema/task" 
-  xsi:schemaLocation="
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
   http://www.springframework.org/schema/beans
   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
   http://www.springframework.org/schema/tx 
@@ -14,30 +17,32 @@
   http://www.springframework.org/schema/cache/spring-cache-3.1.xsd
   http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd 
   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd ">
-  
-    <!-- 注解支持 -->
-  <context:annotation-config />
-  <!--  开启这个配置，spring才能识别@Scheduled注解   -->
-  <task:annotation-driven />
 
-  <!-- 启动组件扫描，排除@Controller组件，该组件由SpringMVC配置文件扫描 -->
-  <context:component-scan base-package="com">
-    <!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" /> -->
-  </context:component-scan>
+	<!-- 注解支持 -->
+	<context:annotation-config />
+	<!-- 开启这个配置，spring才能识别@Scheduled注解 -->
+	<task:annotation-driven />
 
-  <!-- 属性文件位置 -->
-  <bean id="annotationPropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="locations">
-      <list>
-        <value>classpath:properties/jdbc.properties</value>
-       <!--  <value>classpath:properties/common.properties</value> -->
-        <value>classpath:properties/log4j.properties</value>
-      </list>
-    </property>
-  </bean>
-  
-    <!-- 数据源 -->
- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<!-- 启动组件扫描，排除@Controller组件，该组件由SpringMVC配置文件扫描 -->
+	<context:component-scan base-package="com">
+		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" 
+			/> -->
+	</context:component-scan>
+
+	<!-- 属性文件位置 -->
+	<bean id="annotationPropertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:properties/jdbc.properties</value>
+				<!-- <value>classpath:properties/common.properties</value> -->
+				<value>classpath:properties/log4j.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}">
 		</property>
 		<property name="url" value="${jdbc.url}"></property>
@@ -45,58 +50,57 @@
 		<property name="password" value="${jdbc.password}"></property>
 	</bean>
 
-  
-  <!-- Hibernate实体管理器工厂 -->
-  <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-      <property name="dataSource" ref="dataSource" />
-    <!-- <property name="packagesToScan">
-      <ref bean="packagesToScan" />
-    </property> -->
-    <property name="packagesToScan">
-            <value>com.LifeInGDUT.model</value>
-        </property>
-    <property name="hibernateProperties">
-      <props>
-        <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-        <prop key="hibernate.show_sql">true</prop>
-        <prop key="hibernate.format_sql">false</prop>
-        <prop key="hibernate.use_sql_comments">false</prop>
-        <prop key="hibernate.cache.use_second_level_cache">false</prop>
- <!--        <prop key="current_session_context_class">thread</prop> -->
-        <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
-      </props>
-    </property>
-  </bean>
-  
-   <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-    <property name="sessionFactory" ref="sessionFactory" />
-  </bean>
-  
-  <aop:config>
-		<aop:pointcut
-			expression="execution(public * com.LifeInGDUT.service.*.*(..))"
+
+	<!-- Hibernate实体管理器工厂 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- <property name="packagesToScan"> <ref bean="packagesToScan" /> </property> -->
+		<property name="packagesToScan">
+			<value>com.LifeInGDUT.model</value>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.use_sql_comments">false</prop>
+				<prop key="hibernate.cache.use_second_level_cache">false</prop>
+				<!-- <prop key="current_session_context_class">thread</prop> -->
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut expression="execution(public * com.LifeInGDUT.service.*.*(..))"
 			id="businessService" />
-		<aop:advisor
-			advice-ref="txAdvice"
-			pointcut-ref="businessService" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="businessService" />
 	</aop:config>
-  
- <tx:advice id="txAdvice" transaction-manager="transactionManager">
-   <tx:attributes>
-      <tx:method name="get*" read-only="true" propagation="REQUIRED"/><!--之前是NOT_SUPPORT-->
-      <tx:method name="find*" read-only="true" propagation="REQUIRED"/><!--之前是NOT_SUPPORT-->
-      <tx:method name="save*" propagation="REQUIRED"/>
-      <tx:method name="update*" propagation="REQUIRED"/>
-      <tx:method name="remove*" propagation="REQUIRED"/>
-      <tx:method name="add*" propagation="REQUIRED"/>
-      <!--默认其他方法都是REQUIRED-->
-      <tx:method name="*"/>
-   </tx:attributes>
-</tx:advice>
-  
-  <!-- spring提供的上传组件 -->
-  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-    <property name="defaultEncoding" value="utf-8"></property>
-  </bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" propagation="REQUIRED" /><!--之前是NOT_SUPPORT -->
+			<tx:method name="find*" read-only="true" propagation="REQUIRED" /><!--之前是NOT_SUPPORT -->
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<!--默认其他方法都是REQUIRED -->
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- spring提供的上传组件 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
+	</bean>
 
 </beans>
