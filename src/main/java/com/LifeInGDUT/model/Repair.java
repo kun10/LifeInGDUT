@@ -11,21 +11,20 @@ import javax.persistence.Table;
 public class Repair {
 	private int id;
 	private String type;
-	private String school_area;
-	private String life_area;
+	private String schoolArea;
+	private String lifeArea;
 	private String building;
 	private String address;
 	private String description;
-	private String eager;
-	private String repair_unit;
-	private String linkman;
-	private int linknumber;
-	private String unit;
+	private String contact;
+	private String phone;
+	private String studentId;
 	private String time;
-	private String status;
+	private String state;
+	private String submitTime;
 	
 	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getId() {
 		return id;
 	}
@@ -38,17 +37,17 @@ public class Repair {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public String getSchool_area() {
-		return school_area;
+	public String getSchoolArea() {
+		return schoolArea;
 	}
-	public void setSchool_area(String school_area) {
-		this.school_area = school_area;
+	public void setSchoolArea(String schoolArea) {
+		this.schoolArea = schoolArea;
 	}
-	public String getLife_area() {
-		return life_area;
+	public String getLifeArea() {
+		return lifeArea;
 	}
-	public void setLife_area(String life_area) {
-		this.life_area = life_area;
+	public void setLifeArea(String lifeArea) {
+		this.lifeArea = lifeArea;
 	}
 	public String getBuilding() {
 		return building;
@@ -68,35 +67,23 @@ public class Repair {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getEager() {
-		return eager;
+	public String getContact() {
+		return contact;
 	}
-	public void setEager(String eager) {
-		this.eager = eager;
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
-	public String getRepair_unit() {
-		return repair_unit;
+	public String getPhone() {
+		return phone;
 	}
-	public void setRepair_unit(String repair_unit) {
-		this.repair_unit = repair_unit;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-	public String getLinkman() {
-		return linkman;
+	public String getStudentId() {
+		return studentId;
 	}
-	public void setLinkman(String linkman) {
-		this.linkman = linkman;
-	}
-	public int getLinknumber() {
-		return linknumber;
-	}
-	public void setLinknumber(int linknumber) {
-		this.linknumber = linknumber;
-	}
-	public String getUnit() {
-		return unit;
-	}
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
 	}
 	public String getTime() {
 		return time;
@@ -104,11 +91,17 @@ public class Repair {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	public String getStatus() {
-		return status;
+	public String getState() {
+		return state;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getSubmitTime() {
+		return submitTime;
+	}
+	public void setSubmitTime(String submitTime) {
+		this.submitTime = submitTime;
 	}
 	
 	
