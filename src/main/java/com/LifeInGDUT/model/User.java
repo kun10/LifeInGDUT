@@ -2,9 +2,11 @@ package com.LifeInGDUT.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name="user")
 public class User {
 	private String studentId;
 	private String headImg;
@@ -13,6 +15,7 @@ public class User {
 	private String nickName;
 	private String email;
 	private char[] password;
+	private int number;
 	
 	@Id
 	public String getStudentId() {
@@ -56,6 +59,12 @@ public class User {
 	}
 	public void setPassword(char[] password) {
 		this.password = password;
+	}
+	public int getNumber() {
+		return number;
+	}
+	public void setNumber(int number) {
+		this.number = number;
 	}
 	
 	

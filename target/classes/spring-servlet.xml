@@ -24,15 +24,16 @@
     <mvc:resources mapping="/fonts/**" location="/WEB-INF/fonts/" />
     <mvc:resources mapping="/plugins/**" location="/WEB-INF/plugins/" />
     <mvc:resources mapping="/images/**" location="/WEB-INF/images/" />
+    <mvc:resources mapping="/checkImg/**" location="/WEB-INF/checkImg/" />
     <!-- 当上面要访问的静态资源不包括在上面的配置中时，则根据此配置来访问 -->
     <mvc:default-servlet-handler/>
 
-	<!-- <mvc:interceptors>  
+	<mvc:interceptors>  
         <mvc:interceptor>  
-        	<mvc:mapping path="/**"/>
-            <bean class="com.LifeInGDUT.web.UserInterceptor"></bean>  
+        	<mvc:mapping path="/checkImg/**"/>
+            <bean class="com.LifeInGDUT.web.CheckImgInterceptor"></bean>  
         </mvc:interceptor>  
-    </mvc:interceptors>  -->
+    </mvc:interceptors> 
 
     <!-- 开启controller注解支持 -->
     <!-- use-default-filters="false" 只扫描指定的注解 -->
@@ -47,5 +48,14 @@
        <property name="prefix" value="/WEB-INF/jsp/"/>
        <property name="suffix" value=".jsp"/>
     </bean>
+    
+    <!-- spring提供的上传组件 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸为10MB -->
+		<property name="maxUploadSize" value="10485760"></property>
+		<property name="defaultEncoding" value="utf-8"></property>
+		<property name="uploadTempDir" value="uploadImg/temp"></property>
+	</bean>
     
 </beans>

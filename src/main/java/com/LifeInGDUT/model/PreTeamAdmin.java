@@ -1,20 +1,17 @@
 package com.LifeInGDUT.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="repairAdmin")
-public class RepairAdmin {
+@Table(name="preTeamAdmin")
+public class PreTeamAdmin {
 	private int id;
 	private String name;
-	private String password;
-	
+	 private String password;
+	 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getId() {
 		return id;
 	}
@@ -33,6 +30,4 @@ public class RepairAdmin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 }

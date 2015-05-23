@@ -4,15 +4,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="repairAdmin")
-public class RepairAdmin {
+@Table(name="team")
+public class Team {
+	
 	private int id;
 	private String name;
 	private String password;
-	
+	private User user;
+	private String time;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getId() {
@@ -20,6 +24,12 @@ public class RepairAdmin {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
 	}
 	public String getName() {
 		return name;
@@ -33,6 +43,13 @@ public class RepairAdmin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	@OneToOne
+	@JoinColumn(name="user_id")
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 }
