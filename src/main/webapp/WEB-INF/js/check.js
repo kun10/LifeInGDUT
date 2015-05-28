@@ -52,7 +52,7 @@ $(document).ready(function(){
 	    setpage(); 
 	} 
 	function setpage(){ 
-		outstr = outstr + "<a href=#' class='pagehref'>上一页</a>"; 
+		outstr = outstr + "<a href='#' class='pagehref'>上一页</a>"; 
 	    if(totalpage<=10){        //总页数小于十页 
 	        for (count=1;count<=totalpage;count++) setOutstr();
 	    } 
@@ -118,8 +118,8 @@ $(document).ready(function(){
 		var str = "/LifeInGDUT/preTeam/changeToOk?"
 		for(var index=0;index<checkboxes.length;index++){
 			if(checkboxes[index].checked){
-				var idInt=$(checkboxes[index]).parent().next().next().text();
-				str = str +"ids="+idInt+"&";
+				var idInt=$(checkboxes[index]).parent().next().text();
+				str = str +"names="+idInt+"&";
 			}
 		}
 		str =str.substring(0,str.length-1)
@@ -132,10 +132,18 @@ $(document).ready(function(){
 	})
 	//审核不通过按钮事件
 	$(".check-not-ok").click(function(){
+		var str = "/LifeInGDUT/preTeam/changeToNotOk?"
 		for(var index=0;index<checkboxes.length;index++){
 			if(checkboxes[index].checked){
-				var idInt=$(checkboxes[index]).parent().next().next().text();
-				alert(idInt);		
+				var idInt=$(checkboxes[index]).parent().next().text();
+				str = str +"names="+idInt+"&";	
 			}
 		}
+		str =str.substring(0,str.length-1)
+		$.get(str,
+		  function(data,status){
+			if(data=="success"){
+				location.reload();
+			}
+		});
 	})

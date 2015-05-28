@@ -43,8 +43,8 @@ public class MessageService {
 		StringBuilder sb = new StringBuilder(); 
 		for(MultipartFile file: files){
 			long time = System.currentTimeMillis();
-			String originalPath = path+"uploadImg/clear/"+time+file.getOriginalFilename();   //原图存放路径和图片名
-			String pressPath = path+"uploadImg/fuzzy/"+time+file.getOriginalFilename();		//压缩图片存放路径和图片名
+			String originalPath = path+"photo/life/clear/"+time+file.getOriginalFilename();   //原图存放路径和图片名
+			String pressPath = path+"photo/life/fuzzy/"+time+file.getOriginalFilename();		//压缩图片存放路径和图片名
 			System.out.println("origina="+originalPath);
 			System.out.println("press="+pressPath);	
 			try {
@@ -52,11 +52,13 @@ public class MessageService {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println(ImageUtils.resize(originalPath, pressPath, 700	, 700));                         //压缩存放
-			sb.append("uploadImg/clear/").append(time).append(file.getOriginalFilename()).append(";");                                                       //拼凑几张图片路径
+			ImageUtils.resize(originalPath, pressPath, 700	, 700);                         //压缩存放
+			sb.append("photo/life/clear/").append(time).append(file.getOriginalFilename()).append(";");                                                       //拼凑几张图片路径
 		}
 		if(sb.length()!=0){
 			m.setImg(sb.substring(0, sb.length()-1));
+			String small_path = sb.substring(0, sb.length()-1).replace("clear", "fuzzy");
+			m.setImg_small(small_path);
 		}
 		System.out.println(sb.toString());
 		m.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
@@ -72,13 +74,46 @@ public class MessageService {
 			return (sum-1)/page_size+1;
 	}
 	
-	public List<Message> getMessages(Integer id, int page_size){
+	public List<Message> getMessages(Integer id, String studentId, int page_size, int section){
+		List<Integer> message_ids = mDao.selectMessage_idByUser_idFrommessage_user(studentId);
 		int first = 0;
 		if(id!=null){
 			first = mDao.countBiggerThenId(id);    //当前数据库主键小于等于id的数量
 		}
-		List<Message> messages =  mDao.select(first, page_size);
+		List<Message> messages = new ArrayList<Message>();
+		if(section!=0){
+			messages =  mDao.selectBySection(first, page_size, section);
+		}else{
+			messages =  mDao.select(first, page_size);
+		} 
+		//点赞对应的user的list为空
 		setUsersNull(messages);
+		if(studentId!=null){
+			for(Message message : messages){
+				int section1 = message.getSection();
+				if(section1==1){
+					User user = message.getUser();
+					user.setPassword(null);
+					user.setNumber(0);
+					user.setSign(null);
+					user.setEmail(null);
+				}else if(section1==2){
+					message.getTeam().setPassword(null);
+				}else if(section1==3){
+					message.getNewsAdmin().setPassword(null);
+				}
+				for(Integer message_id : message_ids){
+					if(message.getId()==message_id){
+						message.setHavePraise(1);
+						break;
+					}
+				}
+			}
+		}else{
+			for(Message message : messages){
+				message.setHavePraise(0);
+			}
+		}
 		return messages;
 	}
 

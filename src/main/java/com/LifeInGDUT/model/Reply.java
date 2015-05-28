@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -17,8 +18,9 @@ public class Reply {
 	private Reply reply;
 	private String content;
 	private Message message;
-	private String userName;
+	private User user;
 	private String time;
+	private int number;  //表示本条评论里面有多少条回复
 	
 
 	@Id
@@ -51,11 +53,13 @@ public class Reply {
 	public void setMessage(Message message) {
 		this.message = message;
 	}
-	public String getUserName() {
-		return userName;
+	@OneToOne
+	@JoinColumn(name="user_id")
+	public User getUser() {
+		return user;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public String getTime() {
 		return time;
@@ -63,5 +67,11 @@ public class Reply {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	
+	@Transient
+	public int getNumber() {
+		return number;
+	}
+	public void setNumber(int number) {
+		this.number = number;
+	}
 }

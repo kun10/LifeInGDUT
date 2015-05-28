@@ -1,5 +1,7 @@
 package com.LifeInGDUT.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +17,16 @@ public class TeamService {
 	@Autowired
 	private TeamDao tDao;
 	
-	public void add(String name, String password, String studentId){
+	public void add(String name, String password, String studentId, String headImg){
 		Team t = new Team();
 		User user = new User();
 		user.setStudentId(studentId);
 		t.setName(name);
 		t.setPassword(password);
 		t.setUser(user);
+		String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+		t.setTime(time);
+		t.setHeadImg(headImg);
 		tDao.insert(t);
 	}
 	

@@ -38,6 +38,10 @@ public class PreTeamDao {
 		Long l =  (Long)superDao.getSession().createQuery("select count(*) from PreTeam where isCheck = "+isCheck).uniqueResult();
 		return l.intValue();
 	}
+
+	public void updateIsCheckByName(String name) {
+		superDao.getSession().createSQLQuery("update preTeam set isCheck = 1 where name = :name ").setString("name", name).executeUpdate();
+	}
 	
 	
 }

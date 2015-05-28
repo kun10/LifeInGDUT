@@ -13,7 +13,7 @@ public class testRepairService {
 	@Test
 	public void test(){
 		for(Reply r: rService.getReply(1, 4, 1)){
-			System.out.println("userName="+r.getUserName());
+//			System.out.println("userName="+r.getUserName());
 			System.out.println("time="+r.getTime());
 			if(r.getReply()!=null){
 				System.out.println(r.getReply().getId());

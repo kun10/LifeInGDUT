@@ -14,6 +14,7 @@ public class PreTeam {
 	private int id;
 	private String name;
 	private String password;
+	private String headImg;
 	private String time;
 	private User user;
 	private String url;
@@ -66,6 +67,11 @@ public class PreTeam {
 	public void setIsCheck(int isCheck) {
 		this.isCheck = isCheck;
 	}
-	
+	public String getHeadImg() {
+		return headImg;
+	}
+	public void setHeadImg(String headImg) {
+		this.headImg = headImg;
+	}
 	
 }

@@ -12,6 +12,7 @@ public class NewsAdmin {
 	private int id;
 	private String name;
 	private String password;
+	private String headImg;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -33,6 +34,11 @@ public class NewsAdmin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	public String getHeadImg() {
+		return headImg;
+	}
+	public void setHeadImg(String headImg) {
+		this.headImg = headImg;
+	}
 	
 }

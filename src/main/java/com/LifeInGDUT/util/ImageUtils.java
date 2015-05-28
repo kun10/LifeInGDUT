@@ -10,6 +10,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;  
 import java.io.IOException;  
   
+import java.nio.channels.FileChannel;
+
 import javax.imageio.ImageIO;  
   
 /** 
@@ -131,14 +133,46 @@ public final class ImageUtils {
               
         }  
     }  
-  
-    public static void main(String[] args) throws IOException{  
+    
+    
+	public static void fileChannelCopy(File s, File t) {
+		FileInputStream fi = null;
+		FileOutputStream fo = null;
+		FileChannel in = null;
+		FileChannel out = null;
+		try {
+			fi = new FileInputStream(s);
+			fo = new FileOutputStream(t);
+			in = fi.getChannel();// 得到对应的文件通道
+			out = fo.getChannel();// 得到对应的文件通道
+			in.transferTo(0, in.size(), out);// 连接两个通道，并且从in通道读取，然后写入out通道
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fi.close();
+				in.close();
+				fo.close();
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void deleteFile(String path) {
+		File f = new File(path);
+		f.delete();
+	}
+    
+    
+//    public static void main(String[] args) throws IOException{  
 //        pressImage("/home/kun/图片/236kb.jpg", "/home/kun/图片/222.jpg", 100, 50, 0.5f);  
 //        pressText("D:\\\\images\\\\444.jpg", "旺仔之印", "宋体", Font.BOLD|Font.ITALIC, 20, Color.red, 50, 50,.8f);  
         //resizeWidth("c:\\test\\VIP3.png","c:\\test\\VIP3_1.png", 90, 245);   
-        resize("/home/kun/图片/xiong.jpg","/home/kun/图片/xiong6.jpg", 700, 700);    
+//        resize("/home/kun/图片/xiong.jpg","/home/kun/图片/xiong6.jpg", 700, 700);    
           
         //String targetPath = "111.jpg".substring(0,"111.jpg".indexOf(".jpg"));  
         //System.out.println(targetPath);   
-    }  
+//    }  
 }  

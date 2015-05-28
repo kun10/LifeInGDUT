@@ -58,4 +58,7 @@ public class MessageDao {
 	public List<Message> selectByTeam_id(int first, int max, int id) {
 		return superDao.getSession().createQuery("from Message where team_id = "+id+"order by time desc").setFirstResult(first).setMaxResults(max).list();
 	}
+	public List<Integer> selectMessage_idByUser_idFrommessage_user(String studentId) {
+		return superDao.getSession().createSQLQuery("select message_id from message_user where user_id = :studentId ").setString("studentId", studentId).list();
+	}
 }

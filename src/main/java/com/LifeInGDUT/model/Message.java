@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="message")
@@ -19,12 +20,14 @@ public class Message {
 	private int id;
 	private String content;
 	private String img;
+	private String img_small;
 	private String time;
 	private int section;
 	private int praise_number;
 	private User user;
 	private Team team;
 	private NewsAdmin newsAdmin;
+	private int havePraise;   //用户是否对这篇文章点赞
 	private List<User> users = new ArrayList<User>();
 	
 	@Id
@@ -34,6 +37,13 @@ public class Message {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	@Transient
+	public int getHavePraise() {
+		return havePraise;
+	}
+	public void setHavePraise(int havePraise) {
+		this.havePraise = havePraise;
 	}
 	public String getContent() {
 		return content;
@@ -47,6 +57,13 @@ public class Message {
 	public void setImg(String img) {
 		this.img = img;
 	}
+	public String getImg_small() {
+		return img_small;
+	}
+	public void setImg_small(String img_small) {
+		this.img_small = img_small;
+	}
+	
 	public String getTime() {
 		return time;
 	}
@@ -102,5 +119,6 @@ public class Message {
 	public void setNewsAdmin(NewsAdmin newsAdmin) {
 		this.newsAdmin = newsAdmin;
 	}
+	
 	
 }

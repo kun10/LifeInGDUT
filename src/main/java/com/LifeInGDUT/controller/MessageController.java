@@ -65,14 +65,17 @@ public class MessageController {
 	 * 
 	 * @Title: showMessages
 	 * @Description:  显示全部生活圈
-	 * @param id 该id为上页最后一条
+	 * @param message_id 该message_id为上页最后一条
+	 * @param studentId 如果为登录用户，需要参数学号
+	 * @param section 0代表取全部，1代表取用户，2代表取社团，3代表取校内通知
 	 * @param page_size 取出改id后面数据的数量
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/showMessages", method=RequestMethod.GET/*, produces = "application/json;charset=UTF-8"*/)
-	public String showMessages(@RequestParam(value="id", required=false)Integer id, @RequestParam int page_size){
-		List<Message> messages = mService.getMessages(id, page_size);
+	@RequestMapping(value="/showMessages", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	public String showMessages(@RequestParam(value="message_id", required=false)Integer message_id, @RequestParam(value="studentId", required=false)String studentId, @RequestParam int section, @RequestParam int page_size){
+		System.out.println("message_id="+message_id);
+		List<Message> messages = mService.getMessages(message_id, studentId, page_size, section);
 		return JsonFormatUtil.JsonFormat(messages);
 	}
 	
@@ -84,12 +87,12 @@ public class MessageController {
 	 * @param section
 	 * @return
 	 */
-	@ResponseBody
-	@RequestMapping(value="/showMessages", method=RequestMethod.GET, produces = "application/json;charset=UTF-8")
-	public String showMessages(@RequestParam int pageNumber, @RequestParam int page_size, @RequestParam int section){
-		List<Message> messages = mService.getMessages(pageNumber, page_size, section);
-		return JsonFormatUtil.JsonFormat(messages);
-	}
+//	@ResponseBody
+//	@RequestMapping(value="/showMessages", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
+//	public String showMessages(@RequestParam int pageNumber, @RequestParam int page_size, @RequestParam int section){
+//		List<Message> messages = mService.getMessages(pageNumber, page_size, section);
+//		return JsonFormatUtil.JsonFormat(messages);
+//	}
 	
 	/**
 	 * 

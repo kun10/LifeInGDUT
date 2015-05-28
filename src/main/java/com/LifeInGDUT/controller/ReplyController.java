@@ -19,16 +19,31 @@ public class ReplyController {
 	private ReplyService rService;
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public String add(@RequestParam String content, @RequestParam String userName, @RequestParam int message_id, @RequestParam(value="to_id", required=false) int to_id){
-		rService.add(content, userName, message_id, to_id);
+	public String add(@RequestParam String content, @RequestParam String studentId, @RequestParam int message_id, @RequestParam(value="to_id", required=false) int to_id){
+		rService.add(content, studentId, message_id, to_id);
 		return "{\"state\": \"成功\"}";
 	}
 	
+	/**
+	 * 	
+	 * @Title: show
+	 * @Description: TODO
+	 * @param reply_id
+	 * @param page_size
+	 * @param message_id
+	 * @return
+	 */
 	@RequestMapping(value="/show", method=RequestMethod.GET, produces = "application/json;charset=UTF-8")
-	public String show(@RequestParam(value="pageNumber", required=false)Integer pageNumber, @RequestParam int page_size, @RequestParam int message_id){
-		List<Reply> replys = rService.getReply(pageNumber, page_size, message_id);
+	public String show(@RequestParam(value="reply_id", required=false)Integer reply_id, @RequestParam int page_size, @RequestParam int message_id){
+		List<Reply> replys = rService.getReply(reply_id, page_size, message_id);
 		return JsonFormatUtil.JsonFormat(replys);
 	}
 	
+	
+	@RequestMapping(value="/showToReply", method=RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	public String showToReply(@RequestParam int reply_id){
+		Reply reply = rService.getReply(reply_id);
+		return JsonFormatUtil.JsonFormat(reply);
+	}
 	
 }

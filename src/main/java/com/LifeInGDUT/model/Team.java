@@ -15,6 +15,7 @@ public class Team {
 	private int id;
 	private String name;
 	private String password;
+	private String headImg;
 	private User user;
 	private String time;
 	@Id
@@ -50,6 +51,12 @@ public class Team {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public String getHeadImg() {
+		return headImg;
+	}
+	public void setHeadImg(String headImg) {
+		this.headImg = headImg;
 	}
 	
 }

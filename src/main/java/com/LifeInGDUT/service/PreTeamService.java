@@ -14,6 +14,7 @@ import com.LifeInGDUT.dao.PreTeamDao;
 import com.LifeInGDUT.model.PreTeam;
 import com.LifeInGDUT.model.Team;
 import com.LifeInGDUT.model.User;
+import com.LifeInGDUT.util.ImageUtils;
 
 @Component
 public class PreTeamService {
@@ -32,7 +33,7 @@ public class PreTeamService {
 	 * @param files
 	 * @param path
 	 */
-	public void add(String name, String password, String user_id, MultipartFile[] files, String path){
+	public void add(String name, String password, String user_id, MultipartFile[] files, String path, MultipartFile head){
 		PreTeam p = new PreTeam();
 		User user = new User();
 		user.setStudentId(user_id);
@@ -40,8 +41,12 @@ public class PreTeamService {
 		p.setPassword(password);
 		p.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		p.setUser(user);
-		String url = this.uploadPic(files, path);
+		String url =  this.uploadPic(files, path+"WEB-INF/checkImg/", "checkImg/");
+		MultipartFile[] fs = new MultipartFile[1];
+		fs[0] = head;
+		String headImg =  this.uploadPic(fs, path+"photo/preTeamHeadImg/", "photo/preTeamHeadImg/");
 		p.setUrl(url);
+		p.setHeadImg(headImg);
 		p.setIsCheck(0);
 		pDao.insert(p);
 	}
@@ -49,22 +54,22 @@ public class PreTeamService {
 	/**
 	 * 
 	 * @Title: uploadPic
-	 * @Description: 上传申请认证图片
+	 * @Description: 上传多张图片并返回图片名的拼凑字符串
 	 * @param files
-	 * @param path
-	 * @return 返回图片拼凑的路径
+	 * @param path 上传路径
+	 * @return 
 	 */
-	public String uploadPic(MultipartFile[] files, String path){
+	public String uploadPic(MultipartFile[] files, String path, String pre){
 		StringBuilder sb = new StringBuilder(); 
 		for(MultipartFile file: files){
 			long time = System.currentTimeMillis();
-			String originalPath = path+"WEB-INF/checkImg/"+time+file.getOriginalFilename();
+			String originalPath = path+time+file.getOriginalFilename();
 			try {
 				file.transferTo(new File(originalPath));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			sb.append("WEB-INF/checkImg/").append(time).append(file.getOriginalFilename()).append(";");         
+			sb.append(pre).append(time).append(file.getOriginalFilename()).append(";");         
 		}
 		if(sb.length()!=0){
 			return sb.substring(0, sb.length()-1);
@@ -93,13 +98,39 @@ public class PreTeamService {
 	/**
 	 * 
 	 * @Title: changeToTeam
-	 * @Description: 申请通过,删除preTeam表数据,新增Team表数据
+	 * @Description: 申请通过,删除preTeam表数据,新增Team表数据,删除提交的证明材料，删除photo/preTeamHeadImg/下头像，头像复制到photo/teamHeadImg/下
 	 * @param id 
 	 */
-	public void changeToTeam(int id){
-		PreTeam p = pDao.selectById(id);
-		teamService.add(p.getName(), p.getPassword(), p.getUser().getStudentId());
+	public void changeToTeam(String name, String path){
+		PreTeam p = pDao.selectByName(name);
+		String headImg = p.getHeadImg();
+		String urls = p.getUrl();
+		System.out.println("headImg="+headImg);
+		String newHeadImg = "photo/teamHeadImg/"+headImg.substring(21, headImg.length());
+		ImageUtils.copyFile(path+headImg, path+newHeadImg);
+		ImageUtils.deleteFile(path+headImg);
+		delete(urls, path);   //删除证明
+		teamService.add(p.getName(), p.getPassword(), p.getUser().getStudentId(), newHeadImg);
 		pDao.delete(p);
+	}
+	
+	public void delete(String urls, String path){
+		int index = urls.indexOf(';');
+		if(index!=-1){
+			String str1 = urls.substring(0, index);
+			System.out.println(str1);
+			ImageUtils.deleteFile(path+"WEB-INF/"+str1);
+			urls = urls.substring(index+1, urls.length());
+			index = urls.indexOf(';');
+			if(index!=-1){
+				String str2 = urls.substring(0, index);
+				System.out.println(str2);
+				ImageUtils.deleteFile(path+"WEB-INF/"+str2);
+				urls = urls.substring(index+1, urls.length());
+			}
+		}
+		System.out.println(urls);
+		ImageUtils.deleteFile(path+"WEB-INF/"+urls);
 	}
 	
 	/**
@@ -141,9 +172,26 @@ public class PreTeamService {
 			return (sum-1)/page_size+1;
 	}
 
-	public void changeToOk(Integer[] ids) {
-		for(int id : ids){
-			this.changeToTeam(id);
+	public void changeToOk(String[] names, String path) {
+		for(String name : names){
+			this.changeToTeam(name, path);
+		}
+	}
+
+	public void changeToNotOk(String[] names, String path) {
+		for(String name : names){
+			pDao.updateIsCheckByName(name);
+		}
+	}
+
+	public void deleteOnePreTeam(int id, String path) {
+		PreTeam p = pDao.selectById(id);
+		if(p.getIsCheck()==1){
+			String headImg = p.getHeadImg();
+			String urls = p.getUrl();
+			this.delete(urls, path);				//删除证明材料
+			this.delete(headImg, path);		//删除头像
+			pDao.delete(p);
 		}
 	}
 	
