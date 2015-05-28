@@ -96,7 +96,6 @@ public class MessageService {
 					user.setPassword(null);
 					user.setNumber(0);
 					user.setSign(null);
-					user.setEmail(null);
 				}else if(section1==2){
 					message.getTeam().setPassword(null);
 				}else if(section1==3){
