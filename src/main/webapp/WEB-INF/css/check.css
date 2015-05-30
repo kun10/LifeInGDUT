@@ -1,0 +1,285 @@
+*{
+	margin:0px;
+	padding: 0px;
+}
+body{
+	background-color:white;
+	text-align: center;
+}
+ul{
+	list-style: none;
+}
+/*页面遮罩层*/
+#mask{
+	height:1000px;
+	width:100%;
+	background:#000;
+	opacity:0.75;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:1000;
+	display:none;
+}
+/*开头部分*/
+.check-head{
+	width:100%;
+	height: 120px;
+	margin: 0 auto;
+	background-image:url('../images/head.png');
+	overflow:hidden;
+}
+.check-head-contain{
+	width:1300px;
+	margin:auto;
+}
+.check-head-contain p{
+	color: rgb(243, 233, 255);
+	text-align: left;
+	margin: 60px 0px;
+	font-weight: bold;
+	font-size: 22px;
+}
+/*主要部分*/
+.check-main{
+	width: 1349px;
+	margin: 0 auto;
+	background-color:rgb(250, 250, 255);
+	height: 700px;
+}
+/*菜单*/
+.check-main-left{
+	width: 200px;
+	height: 700px;
+	border: solid thin rgb(100, 123, 180);
+	float: left;
+	text-align:left;
+}
+.check-left-header{
+	width:100%;
+	height:35px;
+	background-color:rgb(55, 89, 147);
+}
+.first-menu li a{
+	height: 35px;
+	text-indent: 10px;
+	border-bottom: solid thin rgb(103, 156, 230);
+	background-color:rgb(55, 89, 147);
+	display:block;
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 36px;
+	font-size: 15px;
+}
+.second-menu li{
+	text-indent: 30px;
+	border-bottom:dashed thin rgb(157, 180, 245);;
+	background-image:none;
+}
+.second-menu li a{
+	font-weight: normal;
+	font-size: 14px;
+	background-image: url('../images/childLiBg.gif');
+	background-repeat: no-repeat;
+	background-position: 12px;
+	border-bottom: none;
+	text-indent: 38px;
+	background-color:rgb(250, 250, 255);
+	color:black;
+}
+.second-menu li a:hover{
+	background-color:rgb(237, 238, 253);
+}
+#chooseColor{
+	background-color:rgb(219, 221, 252);
+}
+/*数据显示区域*/
+.check-main-right{
+	width: 1140px;
+	height: 700px;
+	border: solid thin rgb(100, 123, 180);
+	display: inline-block;
+	float: left;
+}
+.check-right-header{
+	width: 100%;
+	height: 35px;
+	background-color:rgb(55, 89, 147);
+	border-bottom: solid thin rgb(100, 123, 180);
+}
+.check-right-header p{
+	background-image: url("../images/bg.gif");
+	background-repeat: no-repeat;
+	display: inline-block;
+	float: left;
+	text-indent: 30px;
+	font-size: 13px;
+	color: rgb(243, 233, 255);
+	font-weight: bold;
+	line-height: 36px;
+	background-position: 10px;
+}
+.check-information{
+	width:100%;
+	height:100%;
+}
+.table{
+	border-collapse:collapse;
+	border:solid thin rgb(157, 180, 245);
+}
+table tbody tr:hover{
+	background-color:rgb(219, 221, 252);
+}
+table thead td{
+	height: 25px;
+	text-align: center;
+	font-size: 15px;
+	font-weight:bold;
+	border:solid thin rgb(157, 180, 245);
+	background-color: rgb(196, 199, 254);
+}
+table tbody td{
+	text-align:center;
+	font-size:14px;
+	height:25px;
+	border:solid thin rgb(157, 180, 245);
+}
+table tbody td a{
+	font-weight: normal;
+	display: inline-block;
+	line-height: 25px;
+}
+.infor-more-button{
+	background-image: url('../images/moreinfor.gif');
+	background-repeat: no-repeat;
+	padding-left: 17px;
+	font-size: 12px;
+	cursor:pointer;
+}
+.infor-more-button:hover{
+	color: rgb(63, 123, 174);
+}
+.delete-button{
+	background-image: url('../images/del.gif');
+	background-repeat: no-repeat;
+	padding-left: 17px;
+	font-size: 12px;
+	cursor:pointer;
+}
+.delete-button:hover{
+	color: rgb(63, 123, 174);
+}
+.check-data-pages{
+	width: 100%;
+	height: 40px;
+	color: rgb(43, 123, 135);
+	font-size: 12px;
+	background-size: 40px;
+	background-color:rgb(196, 199, 254);
+	border-bottom: solid thin rgb(164, 185, 238);
+}
+/*分页及转态改变*/
+.check-ok,.check-not-ok{
+	float: left;
+	padding: 5px;
+	border: 1px solid #AACFDD;
+	background: rgb(224, 243, 252);
+	margin: 5px 0 0 10px;
+	cursor:pointer;
+}
+.check-ok:hover{
+	background-color:white;
+}
+.check-not-ok:hover{
+	background-color:white;
+}
+#setpage{
+	float: right;
+	margin: 5px 15px;
+}
+#setpage a,.current,#info{ 
+    border: 1px solid #AACFDD;
+	background: rgb(224, 243, 252);;
+	display: inline-block;
+	margin: 1px;
+	text-decoration: none;
+	font-size: 12px;
+	padding: 5px;
+	height: 15px;
+	text-align: center;
+	line-height: 15px;
+	color: #5891C7;
+	padding: 2px 5px;
+} 
+#setpage a:hover{
+	background-color:white;
+}
+.current{ 
+    border: 1px solid #83E7E4;
+	background: #A8D7E1;
+	margin: 1px;
+	color: #488BD5;
+	font-weight: bold;
+} 
+/*查看更多信息显示框*/
+#more-infor{
+	height: 450px;
+	width: 500px;
+	background-color: rgb(237,240,242);
+	position: fixed;
+	top: 138px;
+	left: 35%;
+	border:solid thin rgb(102, 28, 235);
+	border-radius:10px;
+	display:none;
+	z-index:2000;
+	color: rgb(221, 207, 247);
+}
+.more-infor-head{
+	width:100%;
+	height:40px;
+	border-bottom: solid thin rgb(103, 156, 230);
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	font-size:14px;
+	font-weight:bold;
+	background-color:rgb(55, 89, 147);
+}
+.more-infor-head p{
+	line-height: 40px;
+	margin-left: 15px;
+	float:left;
+}
+.more-infor-button{
+	float: right;
+	margin: 10px;
+	cursor:pointer;
+}
+.more-infor-button:hover{
+	color:rgb(151, 144, 199);
+}
+.more-infor-main{
+	text-align: left;
+	color: rgb(66, 64, 75);
+	margin: 60px 0px 0px 120px;
+}
+.more-infor-main p{
+	margin-bottom:10px;
+	font-weight: bold;
+}
+.more-infor-main p span{
+	font-weight:normal;
+}
+#more-infor-name{
+	margin-left:10px;
+}
+#more-infor-id{
+	margin-left:27px;
+}
+#more-infor-gdutpass{
+	margin-left:44px;
+}
+#more-infor-password{
+	margin-left:44px;
+}
