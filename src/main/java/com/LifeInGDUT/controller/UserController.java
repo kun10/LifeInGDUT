@@ -111,7 +111,9 @@ public class UserController {
 	@RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public String updateUserInfo(HttpServletRequest request, User user) {
 		JSONObject json = new JSONObject();
-		String fileName = user.getStudentId() + ".jpg";
+		String timeStamp = String.valueOf(System.currentTimeMillis()).substring(9);
+		String fileName = user.getStudentId() + "-" + timeStamp + ".jpg";
+		System.out.println(fileName);
 		UserUtil.deletePhoto(request, POSITION, fileName);
 		try {
 			UserUtil.uploadHeadImg(request, POSITION, user.getHeadImg(), fileName);

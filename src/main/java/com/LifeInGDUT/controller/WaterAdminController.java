@@ -96,6 +96,7 @@ public class WaterAdminController {
 		}
 		model.addAttribute("page", page);
 		model.addAttribute("state", state);
+		model.addAttribute("url", 0);
 		model.addAttribute("count", waterAdminService.getOrderPage(state, SIZE));
 		model.addAttribute("orders", waterAdminService.getOrder(state, page, SIZE));
 		if (state == Water.HANDLED) {
@@ -211,6 +212,8 @@ public class WaterAdminController {
 	 */
 	@RequestMapping(value = "/getChargeRecord", method = RequestMethod.GET)
 	public String getChargeRecord(int page, Model model) {
+		model.addAttribute("url", 1);
+		model.addAttribute("page", page);
 		model.addAttribute("count", waterAdminService.getChargePage(SIZE));
 		model.addAttribute("charges", waterAdminService.getChargeRecord(page, SIZE));
 		return "chargeRecord";

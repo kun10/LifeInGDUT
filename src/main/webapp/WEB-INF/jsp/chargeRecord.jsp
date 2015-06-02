@@ -10,7 +10,7 @@
 <title>送水后台管理界面</title>
 <link href="/LifeInGDUT/css/water.css" rel="stylesheet">
 </head>
-<body onload='pagesNumberSet(1,16)'>
+<body onload='pagesNumberSet(${page},${count},0,${url})'>
 	<!--页面遮罩层-->
 	<div id="mask"></div>
 	<!--开头部分-->
@@ -43,7 +43,7 @@
 			<div class="water-data-header">
 				<p>您当前的位置:充值订单</p>
 				<p class="returnLogin">
-					<a href="login.html">退出登录</a>
+					<a href="/LifeInGDUT/water/logout">退出登录</a>
 				</p>
 			</div>
 			<table border="1px" width="100%" cellspacing="0">
@@ -91,4 +91,7 @@
 </body>
 <script src="/LifeInGDUT/js/jquery.js"></script>
 <script src="/LifeInGDUT/js/water.js"></script>
+<script>
+
+</script>
 </html>

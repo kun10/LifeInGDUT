@@ -80,7 +80,7 @@ $(document).ready(function() {
 	});
 })
 // body加载相关函数
-var totalpage, pagesize, cpage, count, state, curcount, outstr, url;
+var totalpage, pagesize, cpage, count, state, curcount, outstr, url, status;
 var checkAllBox = document.getElementById('checkallbox');
 var checkboxes = document.getElementsByName('checkbox');
 var allOrder = checkboxes.length;
@@ -91,7 +91,7 @@ function pagesNumberSet(nowpage, allpage, nowstate, path) {
 	cpage = nowpage;
 	totalpage = allpage;
 	state = nowstate;
-	url = 0;
+	status = path;
 	setpage();
 }
 // 创建页数函数
@@ -112,10 +112,15 @@ function gotopage(pages) {
 	cpage = pages; // 把页面计数定位到第几页
 	setpage();
 }
+
+/* /LifeInGDUT/water/getChargeRecord?page= */
 function setpage() {
-	url = "<a href='/LifeInGDUT/water/getOrder?state=" + state + "&page="
-			+ (cpage - 1) + "' class='pagehref'>上一页</a>";
-	// alert(url)
+	if (status == 0)
+		url = "<a href='/LifeInGDUT/water/getOrder?state=" + state + "&page="
+				+ (cpage - 1) + "' class='pagehref'>上一页</a>";
+	else if (status == 1)
+		url = "<a href='LifeInGDUT/water/getChargeRecord?page=" + (cpage - 1)
+				+ "' class='pagehref'>上一页</a>";
 	if (cpage > 1)
 		outstr = outstr + url;
 	if (totalpage <= 10) { // 总页数小于十页
@@ -134,19 +139,34 @@ function setpage() {
 				setOutstr();
 		}
 	}
-	if (cpage < totalpage)
-		outstr = outstr + "<a href='/LifeInGDUT/water/getOrder?state=" + state
-				+ "&page=" + (cpage + 1) + "' class='pagehref'>下一页</a>";
+	if (cpage < totalpage) {
+		if (status == 0) {
+			outstr = outstr + "<a href='/LifeInGDUT/water/getOrder?state="
+					+ state + "&page=" + (cpage + 1)
+					+ "' class='pagehref'>下一页</a>";
+		} else if (status == 1) {
+			outstr = outstr
+					+ "<a href='/LifeInGDUT/water/getChargeRecord?page="
+					+ (cpage + 1) + "' class='pagehref'>下一页</a>";
+		}
+	}
 	document.getElementById("setpage").innerHTML = "<div id='setpage'><span id='info'>共"
 			+ totalpage + "页|第" + cpage + "页<\/span>" + outstr + "<\/div>";
 	outstr = "";
 }
 // 根据页码对字符串outstr进行拼接处理
 function setOutstr() {
-	if (count != cpage)
-		outstr = outstr + "<a href='/LifeInGDUT/water/getOrder?state=" + state
-				+ "&page=" + count + "' class='pagehref'>" + count + "</a>";
-	else
+	if (count != cpage) {
+		if (status == 0) {
+			outstr = outstr + "<a href='/LifeInGDUT/water/getOrder?state="
+					+ state + "&page=" + count + "' class='pagehref'>" + count
+					+ "</a>";
+		} else if (status == 1) {
+			outstr = outstr
+					+ "<a href='/LifeInGDUT/water/getChargeRecord?page="
+					+ count + "' class='pagehref'>" + count + "</a>";
+		}
+	} else
 		outstr = outstr + "<span class='current' >" + count + "</span>";
 }
 // 将复选框改为全选或全不选函数
