@@ -49,7 +49,7 @@ public class UserUtil {
 			}
 			String path = request.getSession().getServletContext()
 					.getRealPath("/photo/" + position)
-					+ "\\" + fileName;
+					+ File.separatorChar + fileName;
 			;
 			System.out.println(path);
 			FileOutputStream f = new FileOutputStream(path);
@@ -63,7 +63,7 @@ public class UserUtil {
 		if (fileName != null) {
 			String path = request.getSession().getServletContext()
 					.getRealPath("/photo/" + position)
-					+ "\\" + fileName;
+					+ File.separatorChar + fileName;
 			System.out.println(path);
 			File file = new File(path);
 			if (file.exists()) {

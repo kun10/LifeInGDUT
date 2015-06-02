@@ -9,6 +9,14 @@ body{
 ul{
 	list-style: none;
 }
+#clear:after{
+     content:".";        
+     display:block;        
+     height:0;        
+     clear:both;        
+     visibility:hidden;        
+}
+#clear{zoom:1}
 /*页面遮罩层*/
 #mask{
 	height:1000px;
@@ -45,12 +53,12 @@ ul{
 	width: 1349px;
 	margin: 0 auto;
 	background-color:rgb(250, 250, 255);
-	height: 700px;
+	height: 800px;
 }
 /*菜单*/
 .check-main-left{
 	width: 200px;
-	height: 700px;
+	height: 800px;
 	border: solid thin rgb(100, 123, 180);
 	float: left;
 	text-align:left;
@@ -97,7 +105,7 @@ ul{
 /*数据显示区域*/
 .check-main-right{
 	width: 1140px;
-	height: 700px;
+	height: 800px;
 	border: solid thin rgb(100, 123, 180);
 	display: inline-block;
 	float: left;
@@ -233,13 +241,13 @@ table tbody td a{
 	border:solid thin rgb(102, 28, 235);
 	border-radius:10px;
 	display:none;
-	z-index:2000;
+	z-index:1300;
 	color: rgb(221, 207, 247);
 }
 .more-infor-head{
 	width:100%;
 	height:40px;
-	border-bottom: solid thin rgb(103, 156, 230);
+	border-bottom: solid thin rgb(63, 92, 134);
 	border-top-left-radius:10px;
 	border-top-right-radius:10px;
 	font-size:14px;
@@ -270,6 +278,40 @@ table tbody td a{
 }
 .more-infor-main p span{
 	font-weight:normal;
+}
+.more-infor-main img {
+	width: 100px;
+	height: 100px;
+	float:left;
+	margin-right:10px;
+}
+/*图片放大窗口*/
+#pic-bigger{
+	height: 450px;
+	width: 500px;
+	background-color: rgb(237,240,242);
+	position: fixed;
+	top: 138px;
+	left: 35%;
+	border:solid thin rgb(102, 28, 235);
+	border-radius:10px;
+	display:none;
+	z-index:1400;
+	color: rgb(221, 207, 247);
+}
+.more-img-button {
+	float: right;
+	margin: 10px;
+	cursor:pointer;
+}
+#pic-bigger img {
+	width: 500px;
+	height: 409px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.more-img-button:hover{
+	color:rgb(151, 144, 199);
 }
 #more-infor-name{
 	margin-left:10px;

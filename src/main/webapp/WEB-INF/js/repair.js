@@ -41,10 +41,10 @@ $(document).ready(function(){
 	$(".checkBoxChoose").click(function(){
 		checkBox();
 	})
-	function setPageNumber(nowpage,allpage){
+	function setPageNumber(nowpage,allpage,state){
 		cpage=nowpage;
 		totalpage=allpage;
-		setpage();
+		setpage(state);
 	}
 //	创建页数函数
 	function judgePage(el){
@@ -63,12 +63,12 @@ $(document).ready(function(){
 	    setpage(); 
 	    //reloadpage(target);    //调用显示页面函数显示第几页,这个功能是用在页面内容用ajax载入的情况 
 	} 
-	function setpage(){ 
+	function setpage(state){ 
 	    if(totalpage<=10){        //总页数小于十页 
 	        for (count=1;count<=totalpage;count++) 
 	        {    if(count!=cpage) 
 	            { 
-	                outstr = outstr +"<a href='/LifeInGDUT/repair/showWebRepair?state=1&pageNumber="+count+"' class='pagehref'>"+count+"</a>"; 
+	                outstr = outstr +"<a href='/LifeInGDUT/repair/showWebRepair?state="+state+"&pageNumber="+count+"' class='pagehref'>"+count+"</a>"; 
 	            }else{ 
 	                outstr = outstr + "<span class='current' >"+count+"</span>"; 
 	            } 
@@ -80,20 +80,20 @@ $(document).ready(function(){
 	            for (count=1;count<=10;count++) 
 	            {    if(count!=cpage) 
 	                { 
-	                    outstr = outstr + "<a href='/LifeInGDUT/repair/showWebRepair?state=1&pageNumber="+count+"' class='pagehref'>"+count+"</a>"; 
+	                    outstr = outstr + "<a href='/LifeInGDUT/repair/showWebRepair?state="+state+"&pageNumber="+count+"' class='pagehref'>"+count+"</a>"; 
 	                }else{ 
 	                    outstr = outstr + "<span class='current'>"+count+"</span>"; 
 	                } 
 	            } 
-	            outstr = outstr + "<a href='/LifeInGDUT/repair/showWebRepair?state=1&pageNumber="+(cpage+1)+"' class='pagehref'>下一页</a>"; 
+	            outstr = outstr + "<a href='/LifeInGDUT/repair/showWebRepair?state="+state+"&pageNumber="+(cpage+1)+"' class='pagehref'>下一页</a>"; 
 	        } 
 	        else if(parseInt((cpage-1)/10) == parseInt(totalpage/10)) 
 	        {     
-	            outstr = outstr + "<a href='/LifeInGDUT/repair/showWebRepair?state=1&pageNumber="+(cpage-1)+"'  class='pagehref'>上一页</a>"; 
+	            outstr = outstr + "<a href='/LifeInGDUT/repair/showWebRepair?state="+state+"&pageNumber="+(cpage-1)+"'  class='pagehref'>上一页</a>"; 
 	            for (count=parseInt(totalpage/10)*10+1;count<=totalpage;count++) 
 	            {    if(count!=cpage) 
 	                { 
-	                    outstr = outstr + "<a href='/LifeInGDUT/repair/showWebRepair?state=1&pageNumber="+count+"' class='pagehref'>"+count+"</a>"; 
+	                    outstr = outstr + "<a href='/LifeInGDUT/repair/showWebRepair?state="+state+"&pageNumber="+count+"' class='pagehref'>"+count+"</a>"; 
 	                }else{ 
 	                    outstr = outstr + "<span class='current'>"+count+"</span>"; 
 	                } 
@@ -101,17 +101,17 @@ $(document).ready(function(){
 	        } 
 	        else 
 	        {     
-	            outstr = outstr +  "<a href='/LifeInGDUT/repair/showWebRepair?state=1&pageNumber="+(cpage-1)+"'  class='pagehref'>上一页</a>"; 
+	            outstr = outstr +  "<a href='/LifeInGDUT/repair/showWebRepair?state="+state+"&pageNumber="+(cpage-1)+"'  class='pagehref'>上一页</a>"; 
 	            for (count=parseInt((cpage-1)/10)*10+1;count<=parseInt((cpage-1)/10)*10+10;count++) 
 	            {         
 	                if(count!=cpage) 
 	                { 
-	                    outstr = outstr + "<a href='/LifeInGDUT/repair/showWebRepair?state=1&pageNumber="+count+"' class='pagehref'>"+count+"</a>"; 
+	                    outstr = outstr + "<a href='/LifeInGDUT/repair/showWebRepair?state="+state+"&pageNumber="+count+"' class='pagehref'>"+count+"</a>"; 
 	                }else{ 
 	                    outstr = outstr + "<span class='current'>"+count+"</span>"; 
 	                } 
 	            } 
-	            outstr = outstr + "<a href='/LifeInGDUT/repair/showWebRepair?state=1&pageNumber="+(cpage+1)+"' class='pagehref'>下一页</a>"; 
+	            outstr = outstr + "<a href='/LifeInGDUT/repair/showWebRepair?state="+state+"&pageNumber="+(cpage+1)+"' class='pagehref'>下一页</a>"; 
 	        } 
 	    }     
 	    document.getElementById("setpage").innerHTML = "<div id='setpage'><span id='info'>共"+totalpage+"页|第"+cpage+"页<\/span>" + outstr + "<\/div>"; 

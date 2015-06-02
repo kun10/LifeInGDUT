@@ -2,6 +2,8 @@ package com.LifeInGDUT.controller;
 
 import java.io.IOException;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.LifeInGDUT.service.NewsAdminService;
 
@@ -25,17 +28,30 @@ public class NewsAdminController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public void login(@RequestParam String name, @RequestParam String password, HttpSession session, HttpServletResponse response){
+	public ModelAndView login(@RequestParam String name, @RequestParam String password, HttpSession session){
+		ModelAndView mv = new ModelAndView();
 		if(nService.check(name, password)){
 			session.setAttribute("newsAdmin_name", name);
 			session.setAttribute("newsAdmin_id", nService.getNewsAdmin(name).getId());
-			//跳到进入页面
+			mv.setViewName("newsSend");
 		}else{
-			try {
-				response.sendRedirect("/LifeInGDUT/login");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			mv.addObject("info", "请确认用户名和密码");
+			mv.setViewName("newsAdminLogin");
+		}
+		return mv;
+	}
+	
+	@RequestMapping("/logout")
+	public void logout(HttpServletRequest request,HttpServletResponse response){
+		HttpSession session = request.getSession(false);
+		if(null!=session.getAttribute("newsAdmin_name"))
+			session.removeAttribute("newsAdmin_name");
+			session.removeAttribute("newsAdmin_id");
+		try {
+			response.sendRedirect("/LifeInGDUT/newsAdmin/login");
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
+	
 }

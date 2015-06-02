@@ -1,0 +1,52 @@
+*{
+	margin:0px;
+	padding: 0px;
+}
+body{
+	background-image:url('/LifeInGDUT/images/loginBg_team.jpg');
+	background-size:cover;
+}
+.login {
+	width: 460px;
+	height: 330px;
+	background-color:rgb(222, 235, 250);
+	opacity: 0.7;
+	border-radius: 10px;
+	overflow: hidden;
+	margin: 155px 0 0 850px;
+}
+.loginHead {
+	height: 70px;
+	line-height: 80px;
+	text-align: center;
+	overflow: hidden;
+	font-size: 22px;
+	color: rgb(42, 42, 178);
+	border-bottom: dashed thin rgb(75, 108, 171);
+}
+.login form {
+	margin-top: 40px;
+	color: rgb(58, 58, 204);
+	width:350px;
+}
+.login form p{
+	margin-left:95px;
+	margin-bottom:25px;
+}
+.login p input{
+	height: 18px;
+	width: 180px;
+	float:right;
+}
+.loginNow {
+	margin-left: 205px;
+	margin-top: 10px;
+	width: 100px;
+	height: 25px;
+	background-color: rgb(249, 247, 247);
+	border: solid thin rgb(138, 162, 230);
+	opacity: 0.8;
+	border-radius: 5px;
+	cursor: pointer;
+	color: rgb(44, 44, 177);
+}

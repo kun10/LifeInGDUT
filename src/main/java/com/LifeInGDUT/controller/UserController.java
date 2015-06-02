@@ -78,6 +78,7 @@ public class UserController {
 	public String updateUserInfo(HttpServletRequest request, User user) {
 		JSONObject json = new JSONObject();
 		try {
+			System.out.println(user.getSex());
 			String fileName = user.getStudentId() + ".jpg";
 			UserUtil.deletePhoto(request, POSITION, fileName);
 			UserUtil.uploadHeadImg(request, POSITION, user.getHeadImg(), fileName);

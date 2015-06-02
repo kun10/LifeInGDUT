@@ -30,6 +30,11 @@ public class MessageDao {
 		return l.intValue();
 	}
 	
+	public int countBiggerThenId(int id, int section) {
+		Long l = (Long)superDao.getSession().createQuery("select count(*) from Message where id>="+id+" and section = "+section).uniqueResult(); 
+		return l.intValue();
+	}
+	
 	public List<Message> select(int first, int max){
 		return superDao.getSession().createQuery("from Message order by time desc").setFirstResult(first).setMaxResults(max).list();
 	}
@@ -39,12 +44,16 @@ public class MessageDao {
 		return l.intValue();
 	}
 
-	public void updatePraisesById(int id) {
-		superDao.getSession().createSQLQuery("update Message set goods=goods+1 where id = "+id).executeUpdate();
+	public void updatePraisesById(int id, int sign) {
+		if(sign==1){
+			superDao.getSession().createSQLQuery("update message set praise_number=praise_number+1 where id = "+id).executeUpdate();
+		}else if(sign==0){
+			superDao.getSession().createSQLQuery("update message set praise_number=praise_number-1 where id = "+id).executeUpdate();
+		}
 	}
 	
 	public void insertMessage_User(int message_id, String studentId) {
-		superDao.getSession().createSQLQuery("select into message_user (message_id, user_id) values("+message_id+", "+studentId+")").executeUpdate();
+		superDao.getSession().createSQLQuery("insert into message_user (message_id, user_id) values("+message_id+", "+studentId+")").executeUpdate();
 	}
 
 	public List<User> selectUserById(int message_id) {
@@ -52,7 +61,7 @@ public class MessageDao {
 	}
 
 	public List<Message> selectBySection(int first, int max, int section) {
-		return superDao.getSession().createQuery("from Message where section = "+section).setFirstResult(first).setMaxResults(max).list();
+		return superDao.getSession().createQuery("from Message where section = "+section+"order by time desc").setFirstResult(first).setMaxResults(max).list();
 	}
 
 	public List<Message> selectByTeam_id(int first, int max, int id) {
@@ -61,4 +70,52 @@ public class MessageDao {
 	public List<Integer> selectMessage_idByUser_idFrommessage_user(String studentId) {
 		return superDao.getSession().createSQLQuery("select message_id from message_user where user_id = :studentId ").setString("studentId", studentId).list();
 	}
+	public void deleteMessage_User(int message_id, String studentId) {
+		superDao.getSession().createSQLQuery("delete from message_user where message_id = "+message_id+" and user_id = "+studentId).executeUpdate();
+	}
+	public boolean selectFromTableMessage_user(int message_id, String studentId) {
+		if(superDao.getSession().createSQLQuery("select * from message_user where message_id = "+message_id+" and user_id = "+studentId).uniqueResult()!=null){
+			return false;
+		}
+		return true;
+	}
+	
+	public int countReplyByMessage_id(int message_id){
+		Long l = (Long)superDao.getSession().createQuery("select count(*)from Reply r where r.message.id = "+message_id).uniqueResult(); 
+		return l.intValue();
+	}
+	public int countBiggerThenIdByStudentId(Integer message_id, String studentId) {
+		Long l = (Long)superDao.getSession().createQuery("select count(m.*) from Message m where m.id>="+message_id+" and m.user.studentId = :studentId").setString("studentId", studentId).uniqueResult(); 
+		return l.intValue();
+	}
+	public List<Message> selectByStudentId(int first, int page_size, String studentId) {
+		return superDao.getSession().createQuery("from Message m where m.user.studentId = :studentId order by time desc").setString("studentId", studentId).setFirstResult(first).setMaxResults(page_size).list();
+	}
+	
+	public List<Message> selectByOneId(int first, int page_size, String studentId, Integer id, int section) {
+		System.out.println("id="+id);
+		System.out.println("section="+section);
+		String sql = null;
+		if(section==1){
+			sql ="from Message m where m.user.studentId = '"+studentId+"' order by time desc";
+		}else if(section==2){
+			sql = "from Message m where m.team.id = "+id+" order by time desc";
+		}else if(section==3){
+			sql = "from Message m where m.newsAdmin.id ="+id+" order by time desc";
+		}
+		return superDao.getSession().createQuery(sql).setFirstResult(first).setMaxResults(page_size).list();
+	}
+	public int countBiggerThenIdBySection(String studentId, Integer message_id, Integer id, int section) {
+		String sql = null;
+		if(section==1){
+			sql ="select count(*) from Message m where m.id>="+message_id+" and m.user.studentId = '"+studentId+"'";
+		}else if(section==2){
+			sql = "select count(*) from Message m where m.id>="+message_id+" and m.team.id = "+id;
+		}else if(section==3){
+			sql = "select count(*) from Message m where m.id>="+message_id+" and m.newsAdmin.id = "+id;
+		}
+		Long l = (Long)superDao.getSession().createQuery(sql).uniqueResult(); 
+		return l.intValue();
+	}
+
 }

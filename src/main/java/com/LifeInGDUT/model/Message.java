@@ -28,6 +28,7 @@ public class Message {
 	private Team team;
 	private NewsAdmin newsAdmin;
 	private int havePraise;   //用户是否对这篇文章点赞
+	private int number;
 	private List<User> users = new ArrayList<User>();
 	
 	@Id
@@ -119,6 +120,12 @@ public class Message {
 	public void setNewsAdmin(NewsAdmin newsAdmin) {
 		this.newsAdmin = newsAdmin;
 	}
-	
+	@Transient
+	public int getNumber() {
+		return number;
+	}
+	public void setNumber(int number) {
+		this.number = number;
+	}
 	
 }

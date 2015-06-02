@@ -49,6 +49,7 @@ public class RepairController {
 	@ResponseBody
 	@RequestMapping(value="/showRepair", method=RequestMethod.POST , produces = "application/json;charset=UTF-8")
 	public String showRepair(@RequestParam String studentId, @RequestParam int pageNumber){
+		System.out.println("pageNumber="+pageNumber);
 		int page_size = 10;
 		List<Repair> repairs = rService.getRepairByStudentId(studentId, pageNumber, page_size);
 		net.sf.json.JSONArray json = net.sf.json.JSONArray.fromObject(repairs);

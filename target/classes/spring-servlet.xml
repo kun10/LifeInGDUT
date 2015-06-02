@@ -29,7 +29,7 @@
 	<mvc:interceptors>  
         <mvc:interceptor>  
         	<mvc:mapping path="/checkImg/**"/>
-            <bean class="com.LifeInGDUT.web.CheckImgInterceptor"></bean>  
+        	 <bean class="com.LifeInGDUT.web.CheckImgInterceptor"></bean>  
         </mvc:interceptor>  
     </mvc:interceptors> 
 

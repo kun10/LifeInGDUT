@@ -186,7 +186,7 @@ public class AuthenticateController {
 				fileName = sessionId + "-" + timeStamp + ".gif";
 				String newFilePath = request.getServletContext().getRealPath(
 						"/photo/checkcode")
-						+ "\\" + fileName;
+						+ File.separatorChar + fileName;
 				System.out.println(newFilePath);
 				File newFile = new File(newFilePath);
 				HttpEntity entity = response.getEntity();
