@@ -7,13 +7,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>送水后台维修管理登录界面</title>
-<link href="/LifeInGDUT/css/login.css" rel="stylesheet">
+<link href="/LifeInGDUT/css/waterlogin.css" rel="stylesheet">
 </head>
 <body>
 	<div class="login">
 		<p class="loginHead">工大生活助手送水后台管理页面</p>
 		<form action="/LifeInGDUT/water/login" method="post">
-			<p style="color: red; font-size: 16px;">${errmsg}</p>
 			<p>
 				用户名：<input name="userName" type="text" class="username" value="123"/>
 			</p>
@@ -24,6 +23,7 @@
 				<button type="submit" class="loginNow">登录</button>
 			</p>
 		</form>
+		<p style="color: red; font-size: 16px;margin-left:290px;margin-top:-20px">${errmsg}</p>
 	</div>
 
 </body>

@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.LifeInGDUT.dao.MessageDao;
 import com.LifeInGDUT.model.Message;
 import com.LifeInGDUT.model.NewsAdmin;
-import com.LifeInGDUT.model.Repair;
 import com.LifeInGDUT.model.Team;
 import com.LifeInGDUT.model.User;
 import com.LifeInGDUT.util.ImageUtils;

@@ -1,5 +1,6 @@
 package com.LifeInGDUT.exception;
 
+@SuppressWarnings("serial")
 public class WaterNotEnoughException extends Exception {
 
 	public WaterNotEnoughException() {
