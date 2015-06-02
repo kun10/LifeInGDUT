@@ -10,7 +10,7 @@
 <title>送水后台管理界面</title>
 <link href="/LifeInGDUT/css/water.css" rel="stylesheet">
 </head>
-<body onload='pagesNumberSet(${page},${count},${state})'>
+<body onload='pagesNumberSet(${page},${count},${state},${url})'>
 	<!--页面遮罩层-->
 	<div id="mask"></div>
 	<!--开头部分-->
