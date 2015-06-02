@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.LifeInGDUT.model.Message;
+import com.LifeInGDUT.model.User;
 import com.LifeInGDUT.service.MessageService;
+import com.LifeInGDUT.service.ReplyService;
 import com.LifeInGDUT.util.JsonFormatUtil;
 
 @Controller
@@ -21,6 +23,9 @@ import com.LifeInGDUT.util.JsonFormatUtil;
 public class MessageController {
 	@Autowired
 	private MessageService mService;
+	@Autowired
+	private ReplyService rService;
+	
 	
 	/**
 	 * 
@@ -34,23 +39,23 @@ public class MessageController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/add", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public String addMessage(@RequestParam(value="studentId")String studentId, @RequestParam String content, @RequestParam int section, @RequestParam(value="files", required=false)MultipartFile[] files, HttpSession session){
+	public String addMessage(@RequestParam(value="studentId",required=false)String studentId, @RequestParam String content, @RequestParam int section, @RequestParam(value="files", required=false)MultipartFile[] files, HttpSession session){
 		Integer id = null;
 		if(section==2){
-			if(session.getAttribute("team_id")==null){
-				return "{\"state\": \"失败\"}";
+			if(session.getAttribute("teamName")==null){
+				return "{\"state\": \"fail\"}";
 			}
-			id = Integer.parseInt(session.getAttribute("team_id").toString());
+			id = mService.getTeamIdByName(session.getAttribute("teamName").toString());
 		}else if(section==3){
 			if(session.getAttribute("newsAdmin_id")==null){
-				return "{\"state\": \"失败\"}";
+				return "{\"state\": \"fail\"}";
 			}
 			id = Integer.parseInt(session.getAttribute("newsAdmin_id").toString());
 		}
 		//差一个判空操作
 		String path = session.getServletContext().getRealPath("/");
 		mService.add(content, section, files, path, id, studentId);
-		return "{\"state\": \"成功\"}";
+		return "{\"state\": \"success\"}";
 	}
 	
 	@RequestMapping(value="add", method=RequestMethod.GET)
@@ -78,18 +83,31 @@ public class MessageController {
 	
 	/**
 	 * 
-	 * @Title: showMessages
-	 * @Description: 按版块取message
-	 * @param pageNumber
+	 * @Title: getMessageFromOne
+	 * @Description: TODO
+	 * @param message_id
+	 * @param id
+	 * @param studentId
+	 * @param my_studentId
 	 * @param section
+	 * @param page_size
 	 * @return
 	 */
-//	@ResponseBody
-//	@RequestMapping(value="/showMessages", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
-//	public String showMessages(@RequestParam int pageNumber, @RequestParam int page_size, @RequestParam int section){
-//		List<Message> messages = mService.getMessages(pageNumber, page_size, section);
-//		return JsonFormatUtil.JsonFormat(messages);
-//	}
+	@ResponseBody
+	@RequestMapping(value="/showOne", method=RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	public String getMessageFromOne(@RequestParam(value="message_id", required=false)Integer message_id,@RequestParam(value="id", required=false)Integer id,  @RequestParam(value="studentId", required=false) String studentId, @RequestParam(value="my_studentId", required=false) String my_studentId,  @RequestParam int section, @RequestParam int page_size){
+		System.out.println("message_id="+message_id);
+		List<Message> messages = mService.getOne(message_id, id, studentId, my_studentId, page_size, section);
+		return JsonFormatUtil.JsonFormat(messages);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/showOne", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	public String getMessageFromtestOne(@RequestParam(value="message_id", required=false)Integer message_id,@RequestParam(value="id", required=false)Integer id,  @RequestParam(value="studentId", required=false) String studentId, @RequestParam(value="my_studentId", required=false) String my_studentId,  @RequestParam int section, @RequestParam int page_size){
+		System.out.println("message_id="+message_id);
+		List<Message> messages = mService.getOne(message_id, id, studentId, my_studentId, page_size, section);
+		return JsonFormatUtil.JsonFormat(messages);
+	}
 	
 	/**
 	 * 
@@ -101,9 +119,16 @@ public class MessageController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/praise", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public String praise(@RequestParam int message_id, @RequestParam String user_id){
-		mService.addPraise(message_id, user_id);
-		return "{\"state\": \"成功\"}";
+	public String praise(@RequestParam int message_id, @RequestParam String user_id, @RequestParam int sign){
+		System.out.println("user_id="+user_id);
+		mService.doPraise(message_id, user_id, sign);
+		String returnStr = null;
+		if(sign==1){
+			returnStr = "{\"state\": 1}";
+		}else if(sign==0){
+			returnStr = "{\"state\": 0}";
+		}
+		return returnStr;
 	}
 	
 	/**
@@ -116,24 +141,10 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping(value="/getPraisesUser", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	public String getPraises(@RequestParam int message_id){
-		List<String> names = mService.getPraisesUser(message_id);
-		return JsonFormatUtil.JsonFormat(names);
+		List<User> users = mService.getPraisesUser(message_id);
+		return JsonFormatUtil.JsonFormat(users);
 	}
 	
-	/**
-	 * 
-	 * @Title: getMessagesFromTeam
-	 * @Description: 得到一个社团用户发过的生活圈
-	 * @param pageNumber
-	 * @param page_size
-	 * @param team_id
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value="/getMessagesFromTeam", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public String getMessagesFromTeam(@RequestParam int pageNumber, @RequestParam int page_size, @RequestParam int team_id){
-		List<Message> messages = mService.getMessagesFromTeam(pageNumber, page_size, team_id);
-		return JsonFormatUtil.JsonFormat(messages);
-	}
+	
 	
 }

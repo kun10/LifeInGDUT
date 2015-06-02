@@ -68,8 +68,7 @@ public class UserUtil {
 				}
 			}
 			FileOutputStream file = new FileOutputStream(request.getSession().getServletContext()
-					.getRealPath("/photo/" + position)
-					+ File.separatorChar + fileName);
+					.getRealPath("/photo/" + position)+ File.separatorChar + fileName);
 			file.write(b);
 			file.close();
 		}

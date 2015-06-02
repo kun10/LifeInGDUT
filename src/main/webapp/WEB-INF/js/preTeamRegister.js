@@ -6,6 +6,7 @@ function checkForm(){
 		var pass=$("#password").val();
 		var stuPic=$("#firstfile").val();
 		var aboutPic=$("#secondfile").val();
+		var userPic=$("#thirdfile").val();
 		if(id==""){
 			$("#idInform").text("申请人学号不能为空");
 			result=false;
@@ -42,5 +43,11 @@ function checkForm(){
 		}
 		else
 			$("#secondFileInform").text("");
+		if(userPic==""){
+			$("#thirdFileInform").text("请选择相应的图片上传");
+			result=false;
+		}
+		else
+			$("#thirdFileInform").text("");
 		return result;
 	}

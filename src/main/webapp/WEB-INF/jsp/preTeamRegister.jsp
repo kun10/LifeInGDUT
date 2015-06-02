@@ -38,14 +38,19 @@
             			<button class="upload" name="files">浏览</button>
             			<input id="firstfile" type="file" name="files" onchange="firsttxt.value=this.value"/>
             			<span id="firstFileInform"></span></p>
-            		</p>
+            		<p></p>
             		<p class="uploadFiles">请上传本人社团聘书或者其它证明本人为该社团的图片一张:<br />
 						<input class="fake" type="text" disabled="disabled" name="secondtxt"/>
             			<button class="upload" name="files">浏览</button>
             			<input id="secondfile" type="file" name="files" onchange="secondtxt.value=this.value"/>
             			<span id="secondFileInform"></span></p>
-            		</p>
-            		<input type="file" name="head" >
+            		<p></p>
+            		<p class="uploadFiles">请上传社团头像一张:<br />
+						<input class="fake" type="text" disabled="disabled" name="thirdtxt"/>
+            			<button class="upload" name="head">浏览</button>
+            			<input id="thirdfile" type="file" name="head" onchange="thirdtxt.value=this.value"/>
+            			<span id="thirdFileInform"></span></p>
+            		<p></p>
             		<p style="color: red; font-size: 16px;">${info }</p>
             		<input type="submit" value="提交" id="submit"/>
            	 	</form>

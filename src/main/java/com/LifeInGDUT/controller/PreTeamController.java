@@ -59,16 +59,10 @@ public class PreTeamController {
 	
 	@RequestMapping("/show")
 	public ModelAndView show(@RequestParam(value="pageNumber", required=false, defaultValue= "1")Integer pageNumber, @RequestParam(value="isCheck", required=false, defaultValue="0")Integer isCheck, HttpSession session){
-//		if(pageNumber==null){
-//			pageNumber = 1;
-//		}
-//		if(isCheck==null){
-//			isCheck = 0;
-//		}
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("pageNumber", pageNumber);
-		mv.addObject("preTeams", pService.getPreTeam(pageNumber, 4, isCheck));
-		mv.addObject("allPages", pService.getAllPageCount(4, isCheck));
+		mv.addObject("preTeams", pService.getPreTeam(pageNumber, 2, isCheck));
+		mv.addObject("allPages", pService.getAllPageCount(2, isCheck));
 		if(isCheck==0){
 			mv.setViewName("check");
 		}

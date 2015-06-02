@@ -40,7 +40,7 @@
 			</list>
 		</property>
 	</bean>
-
+	
 	<!-- 数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}">
@@ -88,12 +88,13 @@
 		<tx:attributes>
 			<tx:method name="get*" read-only="true" propagation="REQUIRED" /><!--之前是NOT_SUPPORT -->
 			<tx:method name="find*" read-only="true" propagation="REQUIRED" /><!--之前是NOT_SUPPORT -->
+			<!-- <tx:method name="setAuthorNullAndSetNumber" propagation="NOT_SUPPORTED" /> -->
 			<tx:method name="save*" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED" />
 			<tx:method name="remove*" propagation="REQUIRED" />
 			<tx:method name="add*" propagation="REQUIRED" />
 			<!--默认其他方法都是REQUIRED -->
-			<tx:method name="*" />
+			<tx:method name="*"  />
 		</tx:attributes>
 	</tx:advice>
 

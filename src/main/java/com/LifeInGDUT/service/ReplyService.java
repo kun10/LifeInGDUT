@@ -39,17 +39,24 @@ public class ReplyService {
 	public List<Reply> getReply(Integer reply_id, int page_size, int message_id){
 		int first = 0;
 		if(reply_id!=null){
-			first = rDao.countBiggerThenId(reply_id);    //当前数据库主键小于等于id的数量
+			first = rDao.countBiggerThenId(reply_id, message_id);    //当前数据库主键小于等于id的数量
 		}
 		List<Reply> replys =  rDao.selectByMessage_id(first, page_size, message_id);
-		int number;
 		for(Reply reply : replys){
-			number = setMessageNull(reply) - 1;
-			reply.setNumber(number);
-			reply.setReply(null);    //朋友圈首页不需要恢复的评论
+			reply.setMessage(null);
+			Reply r = reply.getReply();
+			if(r!=null){
+				r.setMessage(null);
+				r.setReply(null);
+				r.getUser().setNumber(0);
+				r.getUser().setPassword(null);
+				r.getUser().setSign(null);
+				r.getUser().setSex(0);
+			}
 			reply.getUser().setNumber(0);
 			reply.getUser().setPassword(null);
 			reply.getUser().setSign(null);
+			reply.getUser().setSex(0);
 		}
 		return replys;
 	}
@@ -61,13 +68,11 @@ public class ReplyService {
 	 * @param reply
 	 * @return 返回回复里面的数量
 	 */
-	public int setMessageNull(Reply reply){
-		int size = 1;
+	public void setMessageNull(Reply reply){
 		reply.setMessage(null);
 		if(reply.getReply()!=null){
-			size += setMessageNull(reply.getReply());
+			setMessageNull(reply.getReply());
 		}
-		return size;
 	}
 
 	public Reply getReply(int reply_id) {
@@ -77,5 +82,9 @@ public class ReplyService {
 		reply.getUser().setPassword(null);
 		reply.getUser().setSign(null);
 		return reply;
+	}
+
+	public int getReplySizeByMessage(int message_id) {
+		return rDao.selectCountByMessage_Id(message_id);
 	}
 }

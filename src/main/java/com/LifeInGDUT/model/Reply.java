@@ -1,6 +1,7 @@
 package com.LifeInGDUT.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,9 +21,16 @@ public class Reply {
 	private Message message;
 	private User user;
 	private String time;
-	private int number;  //表示本条评论里面有多少条回复
-	
-
+//	private int user_id;
+//	
+//
+//	
+//	public int getUser_id() {
+//		return user_id;
+//	}
+//	public void setUser_id(int user_id) {
+//		this.user_id = user_id;
+//	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getId() {
@@ -31,7 +39,7 @@ public class Reply {
 	public void setId(int id) {
 		this.id = id;
 	}
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="to_id")
 	public Reply getReply() {
 		return reply;
@@ -66,12 +74,5 @@ public class Reply {
 	}
 	public void setTime(String time) {
 		this.time = time;
-	}
-	@Transient
-	public int getNumber() {
-		return number;
-	}
-	public void setNumber(int number) {
-		this.number = number;
 	}
 }

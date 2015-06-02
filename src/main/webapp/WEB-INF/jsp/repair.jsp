@@ -10,7 +10,7 @@
     <title>后台维修管理界面</title>
     <link href="/LifeInGDUT/css/repair.css" rel="stylesheet">
 </head>
-<body onload="setPageNumber(${pageNumber},${allPages })">
+<body onload="setPageNumber(${pageNumber},${allPages },${state })">
 	<!--页面遮罩层-->
 	<div id="mask"></div>
 	<!--开头部分-->

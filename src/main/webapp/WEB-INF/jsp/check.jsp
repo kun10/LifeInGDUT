@@ -10,7 +10,7 @@
     <title>生活圈审核页面</title>
     <link href="/LifeInGDUT/css/check.css" rel="stylesheet">
 </head>
-<body onload="pagesNumberSet(${pageNumber},${allPages })">
+<body onload="pagesNumberSet(${pageNumber},${allPages },1)">
 	<!--页面遮罩层-->
 	<div id="mask"></div>
 	<!--开头部分-->
@@ -59,7 +59,7 @@
 								<td>${preTeam.time }</td>
 								<td>
 									<span class="infor-more-button" onclick="inforWrite('${preTeam.user.studentId}','${preTeam.name }','${preTeam.time }','${preTeam.url }')">查看详情</span>
-									<a href=""><span class="delete-button">删除记录</span></a>
+									<!-- <a href=""><span class="delete-button">删除记录</span></a> -->
 								</td>
 							</tr>
 						</c:forEach>
@@ -76,10 +76,17 @@
 			<!--查看详情-->
 			<div id="more-infor">
 				<div class="more-infor-head">
-					<p>订单详情</p>
+					<p>申请材料详情</p>
 					<div class="more-infor-button">关闭</div>
 				</div>	
 				<div class="more-infor-main">	</div>
+			</div>
+			<!--图片放大-->
+			<div id="pic-bigger">
+				<div class="more-infor-head">
+					<div class="more-img-button">返回</div>
+				</div>	
+				<img alt="">
 			</div>
 		</div>
 	</div>

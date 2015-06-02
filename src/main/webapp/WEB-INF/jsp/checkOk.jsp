@@ -10,7 +10,7 @@
     <title>生活圈审核页面</title>
     <link href="/LifeInGDUT/css/check.css" rel="stylesheet">
 </head>
-<body onload="pagesNumberSet(${pageNumber},${allPages })">
+<body onload="pagesNumberSet(${pageNumber},${allPages },2)">
 	<!--开头部分-->
 	<div class="check-head">
 		<div class="check-head-contain">
@@ -40,24 +40,24 @@
 				<table border="1px" width="100%" cellspacing="0" class="table">
 				<thead>
 					<tr>
-						<td><input type="checkbox" name="checkallbox" value="checkbox" id="checkallbox"/></td>
+						<!-- <td><input type="checkbox" name="checkallbox" value="checkbox" id="checkallbox"/></td> -->
 						<td>社团名称</td>
 						<td>负责人学号</td>
 						<td>申请通过时间</td>
-						<td>基本操作</td>
+						<!-- <td>基本操作</td> -->
 					</tr>
 				</thead>
 				<tbody>
 					<form>
 						<c:forEach items="${teams }" var="team">
 							<tr>
-								<td><input type="checkbox" name="checkbox" value="checkbox" class="checkbox"/></td>
+								<!-- <td><input type="checkbox" name="checkbox" value="checkbox" class="checkbox"/></td> -->
 								<td>${team.name }</td>
 								<td> ${team.user.studentId }</td>
 								<td> ${team.time }</td>
-								<td>
+								<!-- <td>
 									<a><span class="delete-button">删除记录</span></a>
-								</td>
+								</td> -->
 							</tr>
 						</c:forEach>
 					</form>

@@ -97,6 +97,11 @@ body{
 	top:32px;
 	left:92px;
 }
+#thirdFileInform{
+	position:absolute;
+	top:32px;
+	left:92px;
+}
 .register-information .uploadFiles{
 	position: relative;
 	height:50px;
@@ -108,6 +113,12 @@ body{
 	left: 252px;
 }
 #secondfile{
+	opacity:0;
+	width:300px;
+	width: 55px;
+	left: 252px;
+}
+#thirdfile{
 	opacity:0;
 	width:300px;
 	width: 55px;
