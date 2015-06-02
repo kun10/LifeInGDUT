@@ -28,7 +28,7 @@ public class UserController {
 	private static final String POSITION = "headimg";
 
 	/* 头像路径前缀 */
-	private static final String PRE_PATH = "/photo/headimg/";
+	private static final String PRE_PATH = "photo/headimg/";
 
 	@Autowired
 	private UserService userService;
