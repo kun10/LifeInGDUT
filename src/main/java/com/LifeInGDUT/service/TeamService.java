@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.LifeInGDUT.dao.TeamDao;
-import com.LifeInGDUT.model.PreTeam;
 import com.LifeInGDUT.model.Team;
 import com.LifeInGDUT.model.User;
 

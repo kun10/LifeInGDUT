@@ -89,6 +89,6 @@
 		</div>
 	</div>
 </body>
-<script src="js/jquery.js"></script>
-<script src="js/water.js"></script>
+<script src="/LifeInGDUT/js/jquery.js"></script>
+<script src="/LifeInGDUT/js/water.js"></script>
 </html>

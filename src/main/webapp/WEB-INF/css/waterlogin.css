@@ -1,0 +1,56 @@
+*{
+	margin:0px;
+	padding: 0px;
+}
+body{
+	background-image: url('../images/loginBg.jpg');
+	background-size:cover;
+	text-align: center;
+}
+/*登录界面*/
+.login{
+	width: 658px;
+	height: 380px;
+	margin: 0 auto;
+	background-image: url('../images/loginInfor.png');
+	overflow: hidden;
+	background-repeat: no-repeat;
+	margin-top: 150px;
+	opacity: 0.85;
+}
+.loginHead{
+	width: 100%;
+	height: 65px;
+	line-height: 65px;
+	color: rgb(246, 238, 238);
+	font-size: 25px;
+	letter-spacing: 5px;
+	font-weight: bold;
+}
+.login form{
+	margin: 100px 0 0 240px;
+}
+.login form p{
+	margin-bottom: 25px;
+	color: rgb(28, 120, 150);
+	font-weight: bold;
+}
+.login form p input{
+	width: 200px;
+	height: 25px;
+	border-radius: 2px;
+	background-color: rgb(202, 245, 247);
+	border: solid thin rgb(105, 197, 226);
+}
+.loginNow{
+	width: 120px;
+	height: 30px;
+	background-color: rgb(97, 192, 223);
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-left: 50px;
+}

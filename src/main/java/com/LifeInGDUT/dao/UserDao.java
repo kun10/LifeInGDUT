@@ -15,7 +15,9 @@ public class UserDao {
 	private SessionFactory sessionFactory;
 
 	public User getUserById(String studentId) {
-		return (User) sessionFactory.getCurrentSession().get(User.class, studentId);
+		return (User) sessionFactory.getCurrentSession()
+				.createQuery("from User user where user.studentId = :studentId").setString("studentId", studentId)
+				.uniqueResult();
 	}
 
 	public void updateUserInfo(User user) {

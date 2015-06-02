@@ -24,18 +24,21 @@ public class WaterService {
 	private UserDao userDao;
 
 	public void placeOrder(User user, Water water) throws Exception {
+		int number = user.getNumber() - water.getNumber();
 		if (!UserUtil.isPerfect(user)) {
 			throw new LackInfoException("请先完善个人信息");
-		} else if (user.getNumber() < 0) {
+		} else if (number < 0) {
 			throw new WaterNotEnoughException("剩余水票不足");
 		} else {
-			waterDao.placeOrder(water);
+			user.setNumber(number);
 			userDao.updateUserInfo(user);
+			water.setTime(UserUtil.getCurrentTime());
+			water.setState(Water.UNHANDLED);
+			waterDao.placeOrder(water);
 		}
 	}
 
-	public void deleteOrder(String studentId, int id)
-			throws IllegalOperationException {
+	public void deleteOrder(String studentId, int id) throws IllegalOperationException {
 		Water water = waterDao.getOrderById(id);
 		if (water == null || !water.getStudentId().equals(studentId)) {
 			throw new IllegalOperationException("非法操作！！");
@@ -45,11 +48,6 @@ public class WaterService {
 	}
 
 	public List<Water> getOrder(String studentId, int state, int page, int size) {
-		return waterDao.getOrder(studentId, state, getStart(page, size), size);
+		return waterDao.getOrder(studentId, state, UserUtil.getStart(page, size), size);
 	}
-
-	public int getStart(int page, int size) {
-		return (page - 1) * size;
-	}
-
 }
