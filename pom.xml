@@ -5,7 +5,7 @@
 	<artifactId>LifeInGDUT</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Hotel Maven Webapp</name>
+	<name>LifeInGDUT Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
@@ -130,6 +130,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>Hotel</finalName>
+		<finalName>LifeInGDUT</finalName>
 	</build>
 </project>

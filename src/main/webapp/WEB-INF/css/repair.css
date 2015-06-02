@@ -1,0 +1,266 @@
+*{
+	margin:0px;
+	padding: 0px;
+}
+body{
+	background-color:white;
+}
+ul{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	display: block;
+	line-height: 35px;
+	font-weight: bold;
+	color: rgb(40, 78, 167);
+}
+/*页面遮罩层*/
+#mask{
+	height:1000px;
+	width:100%;
+	background:#000;
+	opacity:0.75;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:1000;
+	display:none;
+}
+/*开头部分*/
+.repair-head{
+	width: 100%;
+	background-image: url('../images/headBg.jpg');
+	background-size: cover;
+}
+.repair-head-contain{
+	width:1260px;
+	height:100px;
+	margin:0 auto;
+}
+.repair-head-contain p{
+	color: rgb(247, 236, 236);
+	line-height: 110px;
+	font-size: 25px;
+	font-weight: bold;
+}
+.repair-main{
+	width:1349px;
+	margin:0 auto;
+	background-color: white;
+	height:700px;
+}
+/*菜单*/
+.repair-menu{
+	width:200px;
+	height:700px;
+	border:solid thin rgb(122,230,238);
+	float:left;
+}
+.first-menu li{
+	background-image: url('../images/liBg.png');
+	height: 35px;
+	text-indent: 10px;
+	border-bottom: solid thin rgb(103, 156, 230);
+}
+.second-menu{
+	margin-top:1px;
+}
+.second-menu li{
+	text-indent: 30px;
+	border-bottom:dashed thin rgb(79, 168, 213);
+	background-image:none;
+}
+.second-menu li:hover{
+	background-color:rgb(211, 242, 249);
+}
+.second-menu li a{
+	font-weight: normal;
+	font-size: 14px;
+	background-image: url('../images/childLiBg.gif');
+	background-repeat: no-repeat;
+	background-position: 10px;
+}
+/*订单显示*/
+.repair-data{
+	width:1140px;
+	height:700px;
+	border:solid thin rgb(122,230,238);
+	display: inline-block;
+	float:left;
+}
+.repair-data-header{
+	width:100%;
+	height: 35px;
+	background-image: url('../images/liBg.png');
+	border-bottom: solid thin rgb(103, 156, 230);
+}
+.repair-data-header p:first-child{
+	display: block;
+	background-image: url('../images/position.gif');
+	background-repeat: no-repeat;
+	padding-left: 23px;
+	line-height: 30px;
+	background-position-y: 7px;
+	margin-left: 15px;
+	font-size: 13px;
+	font-weight: bold;
+	float:left;
+}
+.returnLogin a{
+	display:block;
+	float: right;
+	background-image: none;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 30px;
+	margin-right: 15px;
+	color:black;
+}
+.returnLogin a:hover{
+	color: rgb(63, 123, 174);
+}
+table{
+	border-collapse:collapse;
+	border:solid thin rgb(181,214,230);
+}
+table thead td{
+	height: 25px;
+	text-align: center;
+	font-size: 15px;
+	background-image: url('../images/tabletd.png');
+	font-weight:bold;
+	border:solid thin rgb(181,214,230);
+}
+table tbody td{
+	text-align:center;
+	font-size:14px;
+	height:25px;
+	border:solid thin rgb(181,214,230);
+}
+table tbody td a{
+	display:inline-block;
+	color:black;
+	font-weight:normal;
+	line-height:30px;
+}
+.repair-data table tbody tr:hover{
+	background-color:rgb(193,235,255);
+}
+.infor-more-button{
+	background-image: url('../images/moreinfor.gif');
+	background-repeat: no-repeat;
+	padding-left: 17px;
+	font-size: 12px;
+	cursor:pointer;
+}
+.infor-more-button:hover{
+	color: rgb(63, 123, 174);
+}
+.delete-button{
+	background-image: url('../images/del.gif');
+	background-repeat: no-repeat;
+	padding-left: 17px;
+	font-size: 12px;
+	cursor:pointer;
+}
+.delete-button:hover{
+	color: rgb(63, 123, 174);
+}
+/*查看更多信息*/
+#more-infor{
+	height: 450px;
+	width: 500px;
+	background-color: rgb(237,240,242);
+	position: fixed;
+	top: 138px;
+	left: 35%;
+	border:solid thin rgb(103, 156, 230);
+	border-radius:10px;
+	display:none;
+	z-index:2000;
+}
+.more-infor-head{
+	width:100%;
+	height:40px;
+	background-image: url('../images/liBg.png');
+	border-bottom: solid thin rgb(103, 156, 230);
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	font-size:14px;
+	font-weight:bold;
+}
+.more-infor-head p{
+	line-height: 40px;
+	margin-left: 15px;
+	float:left;
+}
+.more-infor-button{
+	float: right;
+	margin: 10px;
+	cursor:pointer;
+}
+.more-infor-button:hover{
+	color:rgb(37, 118, 213)
+}
+#more-infor table{
+	margin:0 auto;
+	margin-top:25px;
+}
+#more-infor table tr td:first-child{
+	font-weight:bold;
+}
+/*页数及表单转态改变部分*/
+.repair-data-pages{
+	width: 100%;
+	height: 40px;
+	background-image: url('../images/tabletd.png');
+	color: rgb(43, 123, 135);
+	font-size: 12px;
+	background-size: 40px;
+}
+.checkBoxChoose{
+	float: left;
+	border: 1px solid #AACFDD;
+	background: rgb(224, 243, 252);
+	margin: 9px;
+	font-size: 12px;
+	padding: 5px;
+	height: 15px;
+	text-align: center;
+	line-height: 15px;
+	color: #5891C7;
+	padding: 2px 5px;
+	cursor:pointer;
+}
+.checkBoxChoose:hover{
+	background-color: white;
+}
+#setpage{
+	float: right;
+	margin: 5px 15px;
+}
+#setpage a,.current,#info{ 
+    border: 1px solid #AACFDD;
+	background: rgb(224, 243, 252);;
+	display: inline-block;
+	margin: 1px;
+	text-decoration: none;
+	font-size: 12px;
+	padding: 5px;
+	height: 15px;
+	text-align: center;
+	line-height: 15px;
+	color: #5891C7;
+	padding: 2px 5px;
+} 
+#setpage a:hover{
+	background-color:white;
+}
+.current{ 
+    border: 1px solid #83E7E4;
+	background: #A8D7E1;
+	margin: 1px;
+	color: #488BD5;
+	font-weight: bold;
+} 

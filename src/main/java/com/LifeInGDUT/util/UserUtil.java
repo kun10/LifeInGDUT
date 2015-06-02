@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Component;
 
-import com.LifeInGDUT.model.User;
-
 import sun.misc.BASE64Decoder;
+
+import com.LifeInGDUT.model.User;
 
 @Component
 public class UserUtil {
@@ -69,7 +69,7 @@ public class UserUtil {
 			}
 			FileOutputStream file = new FileOutputStream(request.getSession().getServletContext()
 					.getRealPath("/photo/" + position)
-					+ "\\" + fileName);
+					+ File.separatorChar + fileName);
 			file.write(b);
 			file.close();
 		}
@@ -84,8 +84,8 @@ public class UserUtil {
 	 */
 	public static void deletePhoto(HttpServletRequest request, String position, String fileName) {
 		if (fileName != null) {
-			File file = new File(request.getSession().getServletContext().getRealPath("/photo/" + position) + "\\"
-					+ fileName);
+			File file = new File(request.getSession().getServletContext().getRealPath("/photo/" + position)
+					+ File.separatorChar + fileName);
 			if (file.exists()) {
 				file.delete();
 			}

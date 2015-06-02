@@ -226,7 +226,8 @@ public class AuthenticateController {
 			}
 			if (response.getStatusLine().getStatusCode() == 200) {
 				fileName = sessionId + "-" + timeStamp + ".gif";
-				String newFilePath = request.getServletContext().getRealPath("/photo/checkcode") + "\\" + fileName;
+				String newFilePath = request.getServletContext().getRealPath("/photo/checkcode") + File.separatorChar
+						+ fileName;
 				in = response.getEntity().getContent();
 				os = new FileOutputStream(new File(newFilePath));
 				@SuppressWarnings("unused")

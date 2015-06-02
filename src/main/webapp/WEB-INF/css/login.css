@@ -1,0 +1,54 @@
+*{
+	margin:0px;
+	padding: 0px;
+}
+body{
+	background-image: url('../images/loginBg.png');
+	background-size:cover;
+	text-align: center;
+}
+/*登录界面*/
+.name{
+	font-size: 30px;
+	font-weight: bold;
+	color: rgb(48, 46, 164);
+	margin: 120px 0 30px;
+}
+.login{
+	width:680px;
+	height:320px;
+	margin:0 auto;
+	background-image: url('../images/logininfo.png');
+	overflow: hidden;
+}
+.login-main{
+	width: 380px;
+	height: 180px;
+	margin-top: 95px;
+	margin-left: 265px;
+}
+.login-main input{
+	width: 299px;
+	height: 48px;
+	margin-bottom: 20px;
+	border: none;
+	font-size: 18px;
+	padding-left: 44px;
+}
+.username{
+	background-image: url('../images/loginuser.png');
+}
+.password{
+	background-image: url('../images/loginpassword.png');
+}
+.login-main button{
+	width: 150px;
+	height: 40px;
+	background-color: rgb(64,152,202);
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}

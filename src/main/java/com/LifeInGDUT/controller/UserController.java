@@ -27,6 +27,9 @@ public class UserController {
 	/* 用户头像的存放的文件夹 */
 	private static final String POSITION = "headimg";
 
+	/* 头像路径前缀 */
+	private static final String PRE_PATH = "/photo/headimg/";
+
 	@Autowired
 	private UserService userService;
 
@@ -118,7 +121,7 @@ public class UserController {
 			json.accumulate("reason", e.getMessage());
 			return json.toString();
 		}
-		userService.updateUserInfo(user, fileName);
+		userService.updateUserInfo(user, PRE_PATH + fileName);
 		json.accumulate("state", "success");
 		return json.toString();
 	}
