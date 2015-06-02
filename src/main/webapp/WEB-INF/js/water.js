@@ -91,7 +91,7 @@ function pagesNumberSet(nowpage, allpage, nowstate, path) {
 	cpage = nowpage;
 	totalpage = allpage;
 	state = nowstate;
-	url = path;
+	url = 0;
 	setpage();
 }
 // 创建页数函数
@@ -113,10 +113,9 @@ function gotopage(pages) {
 	setpage();
 }
 function setpage() {
-	if(url == 0) {
-		url = "<a href='/LifeInGDUT/water/getOrder?state=" + state
-		+ "&page=" + (cpage - 1) + "' class='pagehref'>上一页</a>";
-	}
+	url = "<a href='/LifeInGDUT/water/getOrder?state=" + state + "&page="
+			+ (cpage - 1) + "' class='pagehref'>上一页</a>";
+	// alert(url)
 	if (cpage > 1)
 		outstr = outstr + url;
 	if (totalpage <= 10) { // 总页数小于十页
